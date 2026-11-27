@@ -1,0 +1,8 @@
+# Files Vercel should never upload when deploying.
+# Secrets: the API key is set in the Vercel dashboard instead.
+.env
+.env.*
+# Rebuilt by Vercel itself
+node_modules
+dist
+.claude
