@@ -40,22 +40,25 @@ flowchart LR
 
 ## Deploying a change (how it is set up now)
 
-The project folder is linked to the `farmer-assistance-v2` Vercel project (the link is saved in the `.vercel/` folder,
-which is not committed). After making changes:
+The Vercel project is connected to the GitHub repository **Shravanirajput/farmer-assistance-system**.
+**Every push to `main` deploys the live site automatically** (about a minute). Pushes to any other branch get their
+own preview link, so you can check a change before merging it.
 
 ```powershell
 npm run lint
 npm run check:i18n
-npx vercel deploy --prod
+git add .
+git commit -m "Describe your change"
+git push origin main
 ```
 
-The first time on a new laptop, run `npx vercel login` and `npx vercel link --project farmer-assistance-v2` once.
-`.vercelignore` makes sure `.env.local` (the API key) and `node_modules` are never uploaded.
+Watch the build in the Vercel dashboard → **farmer-assistance-v2 → Deployments**, or on GitHub (a ✓ next to the commit).
 
-### Optional: deploy automatically from GitHub
+### Deploying from a laptop without GitHub (backup)
 
-Run `npx vercel git connect` (or Vercel dashboard → project → Settings → Git) to link the GitHub repository.
-After that, every push to `main` deploys automatically and other branches get preview links.
+The project folder can also be linked directly (`.vercel/` folder, not committed). Run once on a new laptop:
+`npx vercel login` then `npx vercel link --project farmer-assistance-v2`. After that, `npx vercel deploy --prod`
+uploads and deploys the folder. `.vercelignore` makes sure `.env.local` (the API key) and `node_modules` are never uploaded.
 
 ## The API key on Vercel
 

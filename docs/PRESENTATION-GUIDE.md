@@ -163,9 +163,9 @@ instead of a lottery, so applying early matters — the site advises this.
 **Q: How is it hosted and what does it cost?** On Vercel's free plan: static files on its CDN plus one serverless
 function, and the same site also serves our documentation and slides at `/docs`. data.gov.in is free. Total cost: ₹0.
 
-**Q: How do you deploy a change?** One command from the project folder, `npx vercel deploy --prod`: Vercel uploads the
-code, runs `npm run build` and publishes it in about a minute. Rollback is one click in the Vercel dashboard. (Linking
-GitHub would make every push deploy automatically.)
+**Q: How do you deploy a change?** We push to the `main` branch on GitHub. Vercel is connected to the repository, so it
+automatically runs `npm run build` and publishes the new version in about a minute. Other branches get a preview link
+for testing first, and rollback is one click in the Vercel dashboard.
 
 **Q: Why does the function run in Mumbai?** Vercel runs functions in the USA by default, and data.gov.in refused
 requests from there — we saw it fail. Setting the region to Mumbai (`bom1` in `vercel.json`) fixed it and makes it
