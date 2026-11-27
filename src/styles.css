@@ -2094,6 +2094,10 @@ html[lang='mr'] .page-header h1 {
   font-size: 0.97rem;
 }
 
+.data-source > span:not(.live-dot) {
+  flex: 1 1 220px;
+}
+
 .data-source a {
   display: inline-flex;
   align-items: center;
@@ -2817,5 +2821,207 @@ html[lang='mr'] .page-header h1 {
 
   .scheme-aside {
     position: static;
+  }
+}
+
+/* ---------- Installed app (PWA) and phone layout ---------- */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-header {
+  padding-top: env(safe-area-inset-top);
+}
+
+.header-language {
+  display: none;
+}
+
+.language-toggle.is-compact button {
+  min-height: 36px;
+  padding: 2px 11px;
+  font-size: 0.92rem;
+}
+
+.button-on-dark {
+  background: transparent;
+  border-color: rgba(251, 245, 233, 0.6);
+  color: var(--rice);
+}
+
+.button-on-dark:hover {
+  background: rgba(251, 245, 233, 0.1);
+}
+
+.nav-install {
+  min-height: 40px;
+  padding: 6px 14px;
+}
+
+.offline-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--kumkum-soft);
+  color: var(--kumkum);
+  font-weight: 600;
+  text-align: center;
+}
+
+.page-loading {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 80px 20px;
+  color: var(--muted);
+}
+
+.tab-bar {
+  display: none;
+}
+
+@media (max-width: 1060px) {
+  .header-language {
+    display: inline-flex;
+  }
+
+  .nav-language {
+    display: none;
+  }
+
+  .header-inner {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Bottom tab bar, like a native Android app */
+  .tab-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -10px 24px -18px rgba(74, 34, 20, 0.5);
+    user-select: none;
+  }
+
+  .tab-bar a {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 3px;
+    min-height: 58px;
+    padding: 4px 2px;
+    border-radius: 14px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .tab-bar .icon {
+    box-sizing: content-box;
+    padding: 3px 16px;
+    border-radius: 999px;
+  }
+
+  .tab-bar a[aria-current='page'] {
+    color: var(--mud);
+  }
+
+  .tab-bar a[aria-current='page'] .icon {
+    background: var(--haldi-soft);
+  }
+
+  .tab-bar a:active .icon {
+    background: rgba(107, 52, 32, 0.1);
+  }
+
+  .site {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .menu-button {
+    padding: 6px 9px;
+  }
+
+  .menu-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .header-inner {
+    min-height: 62px;
+  }
+
+  .site-nav {
+    inset: calc(62px + env(safe-area-inset-top)) 0 auto;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-text strong {
+    font-size: 1rem;
+  }
+
+  .brand-text small {
+    display: none;
+  }
+
+  .hero-inner {
+    padding-top: 28px;
+  }
+
+  .hero-text {
+    font-size: 1.05rem;
+  }
+
+  .hero-actions .button {
+    flex: 1 1 100%;
+  }
+
+  .page-header-inner {
+    padding-block: 12px 22px;
+  }
+
+  .page-header-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .page-body {
+    padding-block: 22px 40px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-text {
+    display: none;
+  }
+}
+
+/* When opened as an installed app: no browser bar, so keep content clear of the notch */
+@media (display-mode: standalone) {
+  body {
+    overscroll-behavior-y: none;
   }
 }

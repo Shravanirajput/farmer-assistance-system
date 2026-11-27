@@ -28,6 +28,8 @@ flowchart TB
 | **localStorage** for bookings and checklists | No login needed, works offline, nothing personal leaves the phone |
 | **Rule-based logic**, not AI/ML | Every result can be explained to a farmer or examiner |
 | **Self-hosted fonts** (Mukta, Rozha One) | Devanagari renders correctly everywhere, no external font requests |
+| **Progressive Web App** instead of a separate Android app | One codebase for website and phone app; installs from Chrome, works offline, updates itself without the Play Store |
+| **Screens loaded on demand** (`React.lazy`) | Faster first start on slow mobile networks |
 
 ## Folder structure
 
@@ -36,10 +38,17 @@ farmer-assistance-system/
 ├── api/
 │   ├── mandi.js              # Vercel serverless function: GET /api/mandi
 │   └── _lib/mandiCore.js     # fetch + clean + cache logic (shared with local dev)
-├── public/favicon.svg        # Warli-style icon
+├── public/
+│   ├── favicon.svg           # Warli-style icon
+│   ├── manifest.webmanifest  # makes the site installable as an app
+│   ├── icons/                # app icons (incl. Android "maskable") and shortcut icons
+│   └── screenshots/          # shown in Chrome's install dialog
 ├── scripts/
 │   ├── check-i18n.mjs        # fails if any Marathi translation is missing
-│   └── save-mandi-snapshot.mjs  # saves today's official rates as the offline fallback
+│   ├── save-mandi-snapshot.mjs  # saves today's official rates as the offline fallback
+│   ├── build-docs.mjs        # turns the Markdown docs into /docs web pages
+│   ├── sw-template.js        # the offline service worker (template)
+│   └── build-sw.mjs          # writes dist/sw.js with this build's file list and version
 ├── src/
 │   ├── main.jsx              # entry: fonts, styles, LanguageProvider, App
 │   ├── App.jsx               # picks the page for the current #route
@@ -53,9 +62,10 @@ farmer-assistance-system/
 │   ├── pages/                # one file per screen
 │   ├── data/                 # crops, diseases, equipment, msp, schemes, commodities, mandiSnapshot.json
 │   ├── i18n/                 # en.js, mr.js, languages.js, LanguageContext.jsx
-│   └── utils/                # recommendCrops, schemeFinder, router, bookings, format, useMandiData
-├── docs/                     # this documentation
+│   └── utils/                # recommendCrops, schemeFinder, router, bookings, format, useMandiData, pwa
+├── docs/                     # this documentation (+ images and the slide deck)
 ├── vite.config.js            # React plugin + serves /api/mandi during npm run dev
+├── vercel.json               # function region (Mumbai) and service-worker headers
 └── package.json
 ```
 
@@ -71,6 +81,11 @@ farmer-assistance-system/
 - **`src/utils/useMandiData.js`** — React hook: try live → fall back to dated snapshot → else show the setup/error message.
 - **`vite.config.js`** — a tiny plugin that mounts the same `api/mandi.js` handler in the dev server,
   so local development behaves exactly like Vercel.
+- **`scripts/sw-template.js` + `scripts/build-sw.mjs`** — the offline service worker: saves the app's files on first
+  open, serves pages fresh when online and from the saved copy when offline, never caches live prices, and gets a new
+  version on every build so installed apps update themselves.
+- **`src/utils/pwa.js`** — registers the service worker, keeps Chrome's install prompt for our *Install app* button,
+  and tracks online/offline for the offline notice.
 
 ## Design system
 

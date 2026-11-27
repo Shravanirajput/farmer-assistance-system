@@ -123,6 +123,20 @@ const paths = {
       <path d="M16.5 12v-1.2M16.5 23v-2.5M11.5 17H13M21.5 17H20M13 13.5l1 1M20 20.5l-1-1M20 13.5l-1 1M13 20.5l1-1" />
     </>
   ),
+  home: (
+    <>
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5.5 10v10h13V10" />
+      <path d="M10 20v-5.5h4V20" />
+    </>
+  ),
+  download: (
+    <>
+      <path d="M12 3.5v11" />
+      <path d="m7.5 10.5 4.5 4.5 4.5-4.5" />
+      <path d="M5 19.5h14" />
+    </>
+  ),
   arrowLeft: <path d="M19 12H5m6-6-6 6 6 6" />,
   arrowRight: <path d="M5 12h14m-6-6 6 6-6 6" />,
   external: (

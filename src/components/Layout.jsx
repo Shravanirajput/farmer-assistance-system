@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { LANGUAGES } from '../i18n/languages'
+import { useInstallPrompt, useOnlineStatus } from '../utils/pwa'
 import { hrefFor } from '../utils/router'
 import Icon from './Icons'
 import { WarliPerson } from './WarliArt'
 
 const NAV_ITEMS = ['home', 'crop', 'disease', 'equipment', 'market', 'schemes', 'history']
+// Bottom tab bar on phones (like a native app). Equipment and My bookings stay in the menu.
+const TABS = [
+  ['home', 'home'],
+  ['crop', 'sprout'],
+  ['disease', 'leafSpots'],
+  ['market', 'scale'],
+  ['schemes', 'scroll'],
+]
 
 export function Logo() {
   return (
@@ -18,22 +27,59 @@ export function Logo() {
   )
 }
 
-export function LanguageToggle({ className = '' }) {
+export function LanguageToggle({ className = '', compact = false }) {
   const { language, setLanguage, t } = useLanguage()
   return (
-    <div className={`language-toggle ${className}`} role="group" aria-label={t('nav.language')}>
+    <div className={`language-toggle ${compact ? 'is-compact' : ''} ${className}`} role="group" aria-label={t('nav.language')}>
       {LANGUAGES.map((option) => (
         <button
           key={option.code}
           type="button"
           lang={option.code}
           aria-pressed={language === option.code}
+          aria-label={option.label}
           onClick={() => setLanguage(option.code)}
         >
-          {option.label}
+          {compact ? option.short : option.label}
         </button>
       ))}
     </div>
+  )
+}
+
+export function InstallButton({ className = 'button button-primary' }) {
+  const { t } = useLanguage()
+  const { canInstall, install } = useInstallPrompt()
+  if (!canInstall) return null
+  return (
+    <button className={`install-button ${className}`} type="button" onClick={install}>
+      <Icon name="download" size={20} /> {t('app.install')}
+    </button>
+  )
+}
+
+function OfflineBanner() {
+  const { t } = useLanguage()
+  const online = useOnlineStatus()
+  if (online) return null
+  return (
+    <p className="offline-banner" role="status">
+      <Icon name="info" size={18} /> {t('app.offline')}
+    </p>
+  )
+}
+
+function TabBar({ route }) {
+  const { t } = useLanguage()
+  return (
+    <nav className="tab-bar" aria-label={t('app.tabs')}>
+      {TABS.map(([id, icon]) => (
+        <a key={id} href={hrefFor(id)} aria-current={route === id ? 'page' : undefined}>
+          <Icon name={icon} size={24} />
+          <span>{t(`nav.${id}`)}</span>
+        </a>
+      ))}
+    </nav>
   )
 }
 
@@ -69,6 +115,8 @@ function Header({ route }) {
           </span>
         </a>
 
+        <LanguageToggle className="header-language" compact />
+
         <button
           className="menu-button"
           type="button"
@@ -77,7 +125,7 @@ function Header({ route }) {
           onClick={() => setMenuOpen((open) => !open)}
         >
           <Icon name={menuOpen ? 'cross' : 'menu'} />
-          <span>{menuOpen ? t('nav.closeMenu') : t('nav.menu')}</span>
+          <span className="menu-label">{menuOpen ? t('nav.closeMenu') : t('nav.menu')}</span>
         </button>
 
         <nav id="site-nav" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label={t('nav.main')}>
@@ -91,6 +139,7 @@ function Header({ route }) {
             ))}
           </ul>
           <LanguageToggle className="nav-language" />
+          <InstallButton className="button button-outline nav-install" />
         </nav>
       </div>
     </header>
@@ -149,10 +198,12 @@ export default function Layout({ route, children }) {
   return (
     <div className="site">
       <Header route={route} />
+      <OfflineBanner />
       <main id="main-content" tabIndex={-1}>
         {children}
       </main>
       <Footer />
+      <TabBar route={route} />
     </div>
   )
 }

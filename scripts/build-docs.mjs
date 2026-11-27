@@ -128,7 +128,7 @@ for (const page of PAGES) {
 
 const deckBody = `
 <h1>Presentation</h1>
-<p>The project presentation (18 slides). View it below, or download the PowerPoint file with speaker notes.</p>
+<p>The project presentation (19 slides). View it below, or download the PowerPoint file with speaker notes.</p>
 <div class="deck">
   <a class="button" href="${DECK}.pptx" download>Download PowerPoint (.pptx)</a>
   <a class="button light" href="${DECK}.pdf" target="_blank" rel="noreferrer">Open PDF in a new tab</a>

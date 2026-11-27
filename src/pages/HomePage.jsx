@@ -1,4 +1,5 @@
 import Icon from '../components/Icons'
+import { InstallButton } from '../components/Layout'
 import { TarpaCircle, Sun, Bird, WarliFrieze } from '../components/WarliArt'
 import { useLanguage } from '../i18n/LanguageContext'
 import { currentSeason } from '../utils/format'
@@ -35,6 +36,7 @@ export default function HomePage() {
               <a className="button button-light" href={hrefFor('market')}>
                 <Icon name="scale" size={20} /> {t('home.ctaMarket')}
               </a>
+              <InstallButton className="button button-on-dark" />
             </div>
           </div>
           <div className="hero-art" aria-hidden="true">

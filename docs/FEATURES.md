@@ -174,3 +174,35 @@ says so (e.g. Namo Shetkari ₹9,000 announcement, Gopinath Munde 2026 expansion
 
 Marathi was written in plain, everyday farming language (बाजारभाव, हमीभाव, खरीप/रब्बी, कृषी सहाय्यक).
 **Please have a native Marathi speaker in the team proofread it before the final submission.**
+
+---
+
+## 7. Installable phone app (PWA) · ॲप
+
+The website is also a **Progressive Web App**: it can be installed on a phone or computer and then behaves like an app.
+
+**How to install:** open the site in Chrome → tap **Install app** on the home page (or Chrome menu ⋮ → *Install app* /
+*Add to Home screen*). The icon **शेतकरी सहाय्य** appears on the home screen.
+
+**What changes when it is installed**
+
+| | |
+|---|---|
+| Opens full-screen | No browser address bar; mud-brown status bar and a Warli splash screen while it starts |
+| App navigation | On phones a **bottom tab bar** (Home, Crops, Diseases, Mandi rates, Schemes), like Android apps |
+| Shortcuts | Long-press the icon → jump straight to Crops, Mandi rates, Schemes or Diseases |
+| Works offline | The app opens without internet; crops, diseases and schemes work fully; mandi rates show the saved official prices with their date; a red notice says you are offline |
+| Always up to date | Every new deployment updates the installed app automatically — no Play Store |
+| Fast start | Each screen is loaded only when first opened |
+
+**How it works (files)**
+
+| File | Job |
+|------|-----|
+| `public/manifest.webmanifest` | The app's name, icons, colours, start page, shortcuts and screenshots for Chrome's install dialog |
+| `public/icons/` | App icons, including "maskable" icons that Android can crop into any shape |
+| `scripts/sw-template.js` | The **service worker**: saves the app's files for offline use; pages are fetched fresh when online, saved copies used only when offline; `/api/` (live prices) is never saved |
+| `scripts/build-sw.mjs` | After each build, writes `dist/sw.js` with the exact list of this build's files and a new version number, so old saved files are replaced automatically |
+| `src/utils/pwa.js` | Registers the service worker, powers the *Install app* button (Chrome's `beforeinstallprompt` event) and the offline notice |
+
+Checked with Chrome's own installability check: no manifest errors and no installability errors.

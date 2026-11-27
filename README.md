@@ -27,7 +27,8 @@ and which government schemes they can apply for.
 | 4 | **Agri Market** · बाजारभाव | **Live** APMC mandi rates, best mandi for a crop, below-MSP warning, earnings calculator, official MSP tables | Government of India: AGMARKNET via data.gov.in API; MSP from PIB releases |
 | 5 | **Government Schemes** · सरकारी योजना | 6-question eligibility finder, 23 real central + Maharashtra schemes with benefits, documents, steps and official links | Official portals, Government Resolutions, PIB — checked 26 Nov 2026 |
 
-Plus: **full English ↔ Marathi switch** (380+ interface strings + all data), works on phones, no login, no personal data sent anywhere.
+Plus: **full English ↔ Marathi switch** (380+ interface strings + all data), no login, no personal data sent anywhere,
+and it **installs as a phone app** (Chrome → *Install app*) that opens full-screen and works offline.
 
 ## Quick start
 

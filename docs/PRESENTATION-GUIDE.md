@@ -17,8 +17,8 @@ and PDF, and online at https://farmer-assistance-v2.vercel.app/docs/presentation
 |---------|--------|-------|------|
 | Shravani Rajput | 1–5 | Introduction, the problem, the five features, the Maharashtra-rooted design, Crop Recommendation | 4 min |
 | Prachi Sagvekar | 6–11 | Disease Guide, Equipment Rental, Agri Market (live data, the maize example), Government Schemes | 4 min |
-| Drishti Rathi | 12–16 | Marathi support, architecture, hosting, data sources, limitations and future scope | 4 min |
-| All three | 17–18 | Live demo (one drives, one narrates), thank you and questions | 5–7 min |
+| Drishti Rathi | 12–17 | Marathi support, the phone app, architecture, hosting, data sources, limitations and future scope | 4 min |
+| All three | 18–19 | Live demo (one drives, one narrates), thank you and questions | 5–7 min |
 
 This is only a suggestion — swap rows as you like. Everyone should be able to answer the Q&A below.
 
@@ -46,8 +46,12 @@ Open https://farmer-assistance-v2.vercel.app (or your local `npm run preview`). 
 6. **Equipment Rental (1 min)** — open **45 HP Tractor** → *Request booking* → press *Send* empty to show validation →
    fill name, mobile `9876543210`, village, a date, 2 days → watch the estimated rent → send → *View my bookings*.
    Mention: *"sample listings, clearly labelled; your data never leaves the phone."*
+7. **It's also an app (30 s)** — on a phone where the app is installed, open **शेतकरी सहाय्य** from the home screen:
+   it opens full-screen with the Warli splash and the bottom tab bar. Turn on airplane mode and reopen it —
+   *"it still works offline and shows the saved official prices with their date."*
 
-**Before the demo:** clear old bookings (or use a fresh browser profile), set language to English, and close other tabs.
+**Before the demo:** install the app on the presenting phone once (Chrome → ⋮ → *Install app*, or the *Install app*
+button on the home page). Clear old bookings (or use a fresh browser profile), set language to English, and close other tabs.
 
 ### If something goes wrong
 
@@ -110,6 +114,16 @@ They are bundled with the site, so Marathi renders correctly even on phones with
 
 **Q: Is it mobile friendly / accessible?** Yes — designed mobile-first, 48px+ touch targets, tables turn into cards on
 small screens, keyboard focus is visible, form errors are announced, and animation stops for users who prefer reduced motion.
+
+**Q: Is it a mobile app?** Yes — it is a **Progressive Web App (PWA)**. In Chrome, *Install app* (or our own *Install app*
+button) adds it to the phone's home screen with its own icon. It then opens full-screen like a native app, with a bottom
+tab bar, and long-pressing the icon gives shortcuts to Crops, Mandi rates, Schemes and Diseases. No Play Store needed,
+and every update we deploy reaches the app automatically.
+
+**Q: How does it work offline?** A *service worker* (a small script the browser runs in the background) saves the app's
+own files when it is first opened. Offline, the app still opens; crop, disease and scheme information works fully, and
+the mandi page shows the saved official prices with their date. Live prices are never cached, so they are never stale
+without saying so.
 
 **Q: What validation is there in the booking form?** Name required; Indian mobile number (10 digits, starting 6–9);
 date today or later; 1–30 days. Errors are shown next to each field in the chosen language.
@@ -181,9 +195,8 @@ equipment listings are samples; bookings live on one device; Marathi should be r
 2. **Weather** from IMD for sowing and spraying advice.
 3. **Real equipment marketplace** with a backend, owner verification and OTP login.
 4. **Soil Health Card input** to refine crop and fertiliser advice.
-5. **Price trends** (past 30 days) and alerts when a crop crosses MSP.
-6. **Offline app (PWA)** so it works in low-network villages.
-7. More states.
+5. **Price trends** (past 30 days) and **notifications** when a crop crosses MSP (the installed app can receive them).
+6. More states and more crops.
 
 **Q: What was the hardest part?**
 Verifying scheme and price data from official sources (several schemes changed in 2025–26), rendering Marathi

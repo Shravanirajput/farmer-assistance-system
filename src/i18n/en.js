@@ -10,6 +10,12 @@ const en = {
     other: 'शेतकरी सहाय्य',
     homeLabel: 'Farmer Assistance home',
   },
+  app: {
+    install: 'Install app',
+    offline: 'You are offline. Saved information is shown; live mandi rates return when you reconnect.',
+    tabs: 'App sections',
+    loading: 'Opening…',
+  },
   nav: {
     skip: 'Skip to main content',
     main: 'Main navigation',

@@ -9,6 +9,9 @@ import '@fontsource/rozha-one/400.css'
 import './styles.css'
 import App from './App.jsx'
 import { LanguageProvider } from './i18n/LanguageContext'
+import { registerServiceWorker } from './utils/pwa'
+
+registerServiceWorker()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

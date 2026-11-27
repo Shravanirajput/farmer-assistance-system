@@ -1,0 +1,34 @@
+{
+  "id": "/",
+  "name": "Farmer Assistance — शेतकरी सहाय्य",
+  "short_name": "शेतकरी सहाय्य",
+  "description": "Crop advice, disease guide, equipment rental, live mandi rates and government schemes for Maharashtra farmers — in Marathi and English.",
+  "lang": "mr",
+  "dir": "ltr",
+  "start_url": "/?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#6b3420",
+  "theme_color": "#6b3420",
+  "categories": ["agriculture", "education", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Crop Recommendation · पीक शिफारस", "short_name": "Crops", "url": "/#crop", "icons": [{ "src": "/icons/shortcut-crop.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Mandi rates · बाजारभाव", "short_name": "Mandi rates", "url": "/#market", "icons": [{ "src": "/icons/shortcut-market.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Government Schemes · सरकारी योजना", "short_name": "Schemes", "url": "/#schemes", "icons": [{ "src": "/icons/shortcut-schemes.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Disease Guide · रोग मार्गदर्शक", "short_name": "Diseases", "url": "/#disease", "icons": [{ "src": "/icons/shortcut-disease.png", "sizes": "96x96", "type": "image/png" }] }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/phone-home.png", "sizes": "1080x2340", "type": "image/png", "form_factor": "narrow", "label": "Home in Marathi" },
+    { "src": "/screenshots/phone-market.png", "sizes": "1080x2340", "type": "image/png", "form_factor": "narrow", "label": "Live mandi rates" },
+    { "src": "/screenshots/phone-schemes.png", "sizes": "1080x2340", "type": "image/png", "form_factor": "narrow", "label": "Government scheme finder" },
+    { "src": "/screenshots/desktop-home.png", "sizes": "1920x1080", "type": "image/png", "form_factor": "wide", "label": "Farmer Assistance on a computer" }
+  ]
+}
